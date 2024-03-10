@@ -1,0 +1,135 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+.container li {
+    /* flex-direction: column; */
+
+  font-size: larger;
+  margin: 10px;
+  padding: 10px;
+  border: 3px solid #ccc;
+  border-radius: 5px;
+  height: 200px;
+  width: 300px;
+  text-align: center;
+  background-color: #be8e8e;
+}
+
+
+.person-list-details {
+  display: flex;
+  justify-content: center;
+  list-style: none; /* Remove default list style */
+  padding: 0;
+}
+
+
+.person-list-details ul {
+  font-size: larger;
+  margin: 10px;
+  padding: 10px;
+  border: 3px solid #ccc;
+  border-radius: 5px;
+  height: 700px;
+  width: 700px;
+  text-align: center;
+  background-color: #be8e8e;
+;
+}
+
+.image {
+  width: 300px;
+  height: 300px;
+  border-radius: 30%;
+  margin: 20px;
+}
+
+
+.all-forms{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 20px;
+}
+
+
+.add-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+}
+
+.add-form input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.add-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #bcb5ae;
+  color: white;
+  cursor: pointer;
+}
+
+.add-form button:hover {
+  background-color: #49921a;
+}
+
+
+
+.delete-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+}
+
+.delete-form input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.delete-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #bcb5ae;
+  color: rgb(9, 9, 9);
+  cursor: pointer;
+}
+
+.delete-form button:hover {
+  background-color: #eb0e0e;
+}
