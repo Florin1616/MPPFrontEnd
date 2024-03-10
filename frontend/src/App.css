@@ -54,7 +54,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  align-items: flex-start;  
+
   margin: 20px;
+  margin-top: 20px;
 }
 
 
@@ -91,7 +94,7 @@
   border: none;
   border-radius: 5px;
   background-color: #bcb5ae;
-  color: white;
+  color: rgb(9, 9, 9);
   cursor: pointer;
 }
 
@@ -132,4 +135,42 @@
 
 .delete-form button:hover {
   background-color: #eb0e0e;
+}
+
+
+
+
+
+
+.update-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+}
+
+.update-form input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.update-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #bcb5ae;
+  color: rgb(9, 9, 9);
+  cursor: pointer;
+}
+
+.update-form button:hover {
+  background-color: #307aba;
 }

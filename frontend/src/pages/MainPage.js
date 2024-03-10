@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import entities from '../components/entities';
 import AddForm from '../components/NewPersonForm';
 import DeleteForm from '../components/DeleteForm';
+import UpdateForm from '../components/UpdateForm';
 
 function MainPage() {
     const [people, setPeople] = useState(entities);
@@ -33,6 +34,7 @@ function MainPage() {
             <div className="all-forms">
                 <AddForm onAddPerson={addPerson} />
                 <DeleteForm onDeletePerson={deletePerson} />
+                <UpdateForm />
             </div>
             
         </div>
