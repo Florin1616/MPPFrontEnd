@@ -1,11 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import entities from '../components/entities';
 
 
-function Details() {
+function Details({ people }) {
     const { id } = useParams();
-    const person = entities.find((entity) => entity.id === parseInt(id));
+    const person = people.find((entity) => entity.id === parseInt(id));
 
     if (!person) {
         return <div>Person not found.</div>;

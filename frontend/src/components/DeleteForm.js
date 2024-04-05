@@ -11,7 +11,7 @@ function DeleteForm({ onDeletePerson }) {
             age: parseInt(age)
         };
         onDeletePerson(personToDelete);
-        // Clear form fields after submission
+
         setName('');
         setAge('');
     };

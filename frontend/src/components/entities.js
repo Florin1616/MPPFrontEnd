@@ -44,6 +44,15 @@ const entities = [
       photo: "/360_F_182819273_Ig0j1upMGsj2kUcrm9a2OIsotsYsufs3.jpg",
 
     },
+    {
+      id: 6,
+      name: 'Ion',
+      age : 21,
+      occupation: 'Student',
+      address: 'Calafat',
+      photo: "/360_F_182819273_Ig0j1upMGsj2kUcrm9a2OIsotsYsufs3.jpg",
+
+    },
   ];
   
   export default entities;
