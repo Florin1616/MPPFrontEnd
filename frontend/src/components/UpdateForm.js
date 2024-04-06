@@ -1,60 +1,36 @@
 import React, { useState } from 'react';
 
-function UpdateForm({ onUpdatePerson }) {
-    const [name, setName] = useState('');
-    const [age, setAge] = useState('');
-    const [newName, setNewName] = useState('');
-    const [newAge, setNewAge] = useState('');
-    const [newOccupation, setNewOccupation] = useState('');
-    const [newAddress, setNewAddress] = useState('');
-    const [newPhoto, setNewPhoto] = useState('');
+function UpdateForm({ personToUpdate, onUpdatePerson }) {
+    const [newName, setNewName] = useState(personToUpdate.name);
+    const [newAge, setNewAge] = useState(personToUpdate.age);
+    const [newOccupation, setNewOccupation] = useState(personToUpdate.occupation);
+    const [newAddress, setNewAddress] = useState(personToUpdate.address);
+    const [newPhoto, setNewPhoto] = useState(personToUpdate.photo);
 
     const handleSubmit = (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    const updatedFields = {};
+        const updatedFields = {
+            id: personToUpdate.id,
+            name: newName,
+            age: newAge,
+            occupation: newOccupation,
+            address: newAddress,
+            photo: newPhoto
+        };
 
-    if (newName !== '') {
-        updatedFields.newName = newName;
-    }
-    if (newAge !== '') {
-        updatedFields.newAge = parseInt(newAge);
-    }
-    if (newOccupation !== '') {
-        updatedFields.newOccupation = newOccupation;
-    }
-    if (newAddress !== '') {
-        updatedFields.newAddress = newAddress;
-    }
-    if (newPhoto !== '') {
-        updatedFields.newPhoto = newPhoto;
-    }
+        onUpdatePerson(updatedFields);
 
-    // Construct personToUpdate separately with name and age
-    const personToUpdate = {
-        name: name,
-        age: parseInt(age),
-        ...updatedFields
+        setNewName('');
+        setNewAge('');
+        setNewOccupation('');
+        setNewAddress('');
+        setNewPhoto('');
     };
-
-    onUpdatePerson(personToUpdate);
-
-    // Clear form fields after submission
-    setName('');
-    setAge('');
-    setNewName('');
-    setNewAge('');
-    setNewOccupation('');
-    setNewAddress('');
-    setNewPhoto('');
-};
-
 
     return (
         <form className="update-form" onSubmit={handleSubmit}>
             <h1>Update a person</h1>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required />
-            <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Age" required />
             <input type="text" value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="New Name" />
             <input type="number" value={newAge} onChange={(e) => setNewAge(e.target.value)} placeholder="New Age" />
             <input type="text" value={newOccupation} onChange={(e) => setNewOccupation(e.target.value)} placeholder="New Occupation" />

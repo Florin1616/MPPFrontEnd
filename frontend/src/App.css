@@ -11,19 +11,23 @@
   font-size: larger;
   margin: 10px;
   padding: 10px;
-  border: 3px solid #ccc;
+  border: 6px solid #ccc;
+  border-color: #000000;
   border-radius: 5px;
-  height: 200px;
+  height: 250px;
   width: 300px;
   text-align: center;
   background-color: #be8e8e;
+  
 }
+
+
 
 
 .person-list-details {
   display: flex;
   justify-content: center;
-  list-style: none; /* Remove default list style */
+  list-style: none;
   padding: 0;
 }
 
@@ -124,7 +128,7 @@
   border: 1px solid #ddd;
 }
 
-.delete-form button {
+/* .delete-form button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -135,7 +139,7 @@
 
 .delete-form button:hover {
   background-color: #eb0e0e;
-}
+} */
 
 
 
@@ -225,4 +229,40 @@
   background-color: #bcb5ae;
   color: rgb(9, 9, 9);
   cursor: pointer;
+}
+
+
+
+
+.delete-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #bcb5ae;
+  color: rgb(9, 9, 9);
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #db2905;
+}
+
+.update-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #bcb5ae;
+  color: rgb(9, 9, 9);
+  cursor: pointer;
+}
+
+.update-button:hover {
+  background-color: #307aba;
+}
+
+
+.closeButtonUpdateForm{
+  position: 'absolute';
+  top: '10px';
+   right: '10px';
 }
