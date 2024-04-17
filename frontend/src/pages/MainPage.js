@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import entities from '../components/entities';
 import AddForm from '../components/NewPersonForm';
@@ -8,6 +8,8 @@ import FilterForm from '../components/FilterForm';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 import Pagination from '../components/Pagination';
+import { PeopleContext } from '../components/PeopleContext';
+
 
 function Modal({ children, onClose }) {
     return (
@@ -35,8 +37,8 @@ function Modal({ children, onClose }) {
     );
 }
 
-function MainPage({ people, setPeople, fetchPeople }) {
-
+function MainPage() {
+    const { people, setPeople, fetchPeople, error } = useContext(PeopleContext);
     const [showUpdateForm, setShowUpdateForm] = useState(false);
     const [personToUpdate, setPersonToUpdate] = useState(null);
 
@@ -46,6 +48,12 @@ function MainPage({ people, setPeople, fetchPeople }) {
     const lastPostIndex = currentPage * peoplePerPage;
     const firstPostIndex = lastPostIndex - peoplePerPage;
     const currentPeople = people.slice(firstPostIndex, lastPostIndex);
+
+    const ageCategories = {
+        '<30': people.filter(person => person.age < 30).length,
+        '30-50': people.filter(person => person.age >= 30 && person.age <= 50).length,
+        '>50': people.filter(person => person.age > 50).length,
+    };
 
     const filterPeople = (ageToFilter) => {
         const filteredPeople = people.filter(person => Number(person.age) === Number(ageToFilter));
@@ -74,9 +82,10 @@ function MainPage({ people, setPeople, fetchPeople }) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
+                // console.log(response.body)
             })
             .then(data => {
-                fetchPeople();
+                setPeople(prevPeople => [...prevPeople, data]);
 
             })
             .catch((error) => {
@@ -127,63 +136,65 @@ function MainPage({ people, setPeople, fetchPeople }) {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                setPeople(updatedPeople);
-            })
+                setPeople(prevPeople => prevPeople.map(person => person.id === data.id ? data : person));            })
             .catch((error) => {
                 console.error('Error:', error);
             });
     };
 
     return (
-        <div className="container">
-            <ul>
-                {currentPeople.map((person) => (
-                    <li key={person.id}>
-                        <h3>{person.name}</h3>
-                        <p>Age: {person.age}</p>
-                        <Link to={`/person/${person.id}`}>View Details</Link>
-                        <p><button className='delete-button' onClick={() => deletePerson(person.id)}>Delete</button></p>
-                        <button className='update-button' onClick={() => openUpdateForm(person)}>Update</button>
+        error ? (
+            <p>{error}</p>
+        ) : (
 
-                    </li>
-                ))}
-            </ul>
-            <Pagination
-                totalPeople={people.length}
-                peoplePerPage={peoplePerPage}
-                setCurrentPage={setCurrentPage}
+            <div className="container">
+                <ul>
+                    {currentPeople.map((person) => (
+                        <li key={person.id}>
+                            <h3>{person.name}</h3>
+                            <p>Age: {person.age}</p>
+                            <Link to={`/person/${person.id}`}>View Details</Link>
+                            <p><button className='delete-button' onClick={() => deletePerson(person.id)}>Delete</button></p>
+                            <button className='update-button' onClick={() => openUpdateForm(person)}>Update</button>
 
-            />
-            <div className="all-forms">
-                <AddForm onAddPerson={addPerson} />
-                {/* <DeleteForm onDeletePerson={deletePerson} /> */}
-
-                {showUpdateForm && (
-                    <Modal onClose={closeUpdateForm}>
-                        <UpdateForm personToUpdate={personToUpdate} onUpdatePerson={updatePerson} onClose={closeUpdateForm} />
-                    </Modal>
-                )}
-                <FilterForm onFilterPeople={filterPeople} />
-            </div>
-
-            <div className="chart">
-                <Bar
-                    data={{
-                        labels: entities.map((entity) => entity.name),
-                        datasets: [
-                            {
-                                label: 'Age',
-                                data: entities.map((entity) => entity.age),
-                            },
-                        ]
-                    }}
-
+                        </li>
+                    ))}
+                </ul>
+                <Pagination
+                    totalPeople={people.length}
+                    peoplePerPage={peoplePerPage}
+                    setCurrentPage={setCurrentPage}
 
                 />
+                <div className="all-forms">
+                    <AddForm onAddPerson={addPerson} />
+                    {/* <DeleteForm onDeletePerson={deletePerson} /> */}
+
+                    {showUpdateForm && (
+                        <Modal onClose={closeUpdateForm}>
+                            <UpdateForm personToUpdate={personToUpdate} onUpdatePerson={updatePerson} onClose={closeUpdateForm} />
+                        </Modal>
+                    )}
+                    <FilterForm onFilterPeople={filterPeople} />
+                </div>
+
+                <div className="chart">
+                    <Bar
+                        data={{
+                            labels: Object.keys(ageCategories),
+                            datasets: [
+                                {
+                                    label: 'Age',
+                                    data: Object.values(ageCategories),
+                                },
+                            ]
+                        }}
+                    />
+                </div>
+
+
             </div>
-
-
-        </div>
+        )
     );
 }
 
