@@ -51,7 +51,7 @@ export const PeopleProvider = ({ children }) => {
       });
     };
 
-    client.activate();
+    // client.activate();
 
     return () => {
       client.deactivate();

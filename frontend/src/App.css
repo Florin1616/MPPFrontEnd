@@ -266,3 +266,91 @@
   top: '10px';
    right: '10px';
 }
+
+
+.property-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.property-card p {
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.property-card button {
+  background-color: #008CBA; /* Blue */
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.property-card button:hover {
+  background-color: #007B9A; /* Darker blue */
+}
+
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+
+
+
+.add-property-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.add-property-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+}
+
+.add-property-form input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.add-property-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #bcb5ae;
+  color: rgb(9, 9, 9);
+  cursor: pointer;
+}
+
+.add-property-form button:hover {
+  background-color: #49921a;
+}
