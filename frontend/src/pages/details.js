@@ -53,6 +53,9 @@ function Details() {
     const [newProperty, setNewProperty] = useState(''); 
 
 
+    const token = localStorage.getItem('token'); // Get the token from local storage
+    console.log('Token from local storage:', token); // Debugging line to log the token
+
     const handleUpdate = (propertyToUpdate, propertyId) => {
         console.log(propertyId);
 
@@ -76,6 +79,8 @@ function Details() {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`, // Add the token in the header
+
             },
             body: JSON.stringify(propertyToUpdate),
         })
@@ -97,6 +102,9 @@ function Details() {
     const handleDelete = (propertyId) => {
         fetch(`http://localhost:8080/properties/${propertyId}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`, // Add the token in the header
+            },
         })
             .then(response => {
                 if (!response.ok) { throw response }
@@ -113,30 +121,41 @@ function Details() {
    
 
     useEffect(() => {
-        fetch(`http://localhost:8080/entities/${id}`)
+        fetch(`http://localhost:8080/entities/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`, // Add the token in the header
+            },
+        })
             .then(response => response.json())
             .then(data => setPerson(data))
             .catch(error => console.error('Error:', error));
     }, [id]);
 
     const fetchProperties = () => {
-        fetch(`http://localhost:8080/properties/person/${id}`)
+        fetch(`http://localhost:8080/properties/person/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`, // Add the token in the header
+            },
+        })
             .then(response => response.json())
             .then(data => {
                 setProperties(data);
+                console.log("MUIE");
             })
             .catch(error => console.error('Error:', error));
     };
 
     useEffect(() => {
         fetchProperties();
-    }, [id]);
+    }, [id, token]);
 
     const addProperty = (newProperty) => {
         fetch('http://localhost:8080/properties', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`, // Add the token in the header
+
             },
             body: JSON.stringify(newProperty),
         })
@@ -145,7 +164,6 @@ function Details() {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 return response.json();
-                console.log(response.body)
             })
             .then(data => {
                 setProperties(prevProperties => [...prevProperties, data]);

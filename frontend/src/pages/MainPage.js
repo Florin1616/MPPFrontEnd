@@ -9,6 +9,7 @@ import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 import Pagination from '../components/Pagination';
 import { PeopleContext } from '../components/PeopleContext';
+import { useNavigate } from 'react-router-dom';
 
 
 function Modal({ children, onClose }) {
@@ -92,6 +93,8 @@ function MainPage() {
                 console.error('Error:', error);
             });
     };
+    const navigate = useNavigate();
+
 
     const deletePerson = (personToDeleteId) => {
         fetch(`http://localhost:8080/entities/${personToDeleteId}`, {
@@ -116,7 +119,7 @@ function MainPage() {
             if (person.id === personToUpdate.id) {
                 return {
                     ...person,
-                    name: personToUpdate.newName !== undefined ? personToUpdate.newName : person.name,
+                    propertyType: personToUpdate.newName !== undefined ? personToUpdate.newName : person.name,
                     age: personToUpdate.newAge !== undefined ? personToUpdate.newAge : person.age,
                     occupation: personToUpdate.newOccupation !== undefined ? personToUpdate.newOccupation : person.occupation,
                     address: personToUpdate.newAddress !== undefined ? personToUpdate.newAddress : person.address,
@@ -136,18 +139,33 @@ function MainPage() {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                setPeople(prevPeople => prevPeople.map(person => person.id === data.id ? data : person));            })
+                setPeople(prevPeople => prevPeople.map(person => person.id === data.id ? data : person));
+            })
             .catch((error) => {
                 console.error('Error:', error);
             });
     };
 
+    const logout = async () => {
+        // const token = localStorage.getItem('token');
+        // await fetch('http://localhost:8080/logout', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Authorization': `Bearer ${token}`,
+        //     },
+        // });
+        // localStorage.removeItem('token');
+        navigate('/login');
+
+    }
     return (
         error ? (
             <p>{error}</p>
         ) : (
 
             <div className="container">
+                <button onClick={logout}>Logout</button>
+
                 <ul>
                     {currentPeople.map((person) => (
                         <li key={person.id}>
@@ -167,7 +185,7 @@ function MainPage() {
 
                 />
                 <div className="all-forms">
-                    <AddForm onAddPerson={addPerson} />
+                    {/* <AddForm onAddPerson={addPerson} /> */}
                     {/* <DeleteForm onDeletePerson={deletePerson} /> */}
 
                     {showUpdateForm && (
